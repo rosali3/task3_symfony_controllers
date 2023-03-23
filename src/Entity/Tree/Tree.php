@@ -21,22 +21,22 @@ use Doctrine\ORM\Mapping as ORM;
 #[ApiResource(
     operations:
         [
-            new Post(uriTemplate:'tree/post',
+            new Post(uriTemplate:'tree/{id}/post',
                 controller: TreePostController::class,
                 name:'CreateANewTree'),
-            new Get(uriTemplate:'tree/get',
+            new Get(uriTemplate:'tree/{id}/get',
                 controller: TreeGetItemController::class,
                 name:'GetInfoAboutOneTree'),
-            new GetCollection(uriTemplate:'tree/get-collection',
+            new GetCollection(uriTemplate:'tree/collection',
                                 controller: TreeGetCollectionController::class,
                                 name:'GetCollectionOfTrees'),
-            new Put(uriTemplate:'tree/put',
+            new Put(uriTemplate:'tree/{id}/put',
                     controller: TreePutController::class,
-                    name:'PutTree'),
-            new Patch(uriTemplate:'tree/patch',
+                    name:'ReplaceATree'),
+            new Patch(uriTemplate:'tree/{id}/update',
                         controller: TreePatchController::class,
-                        name:'GetCollectionOfTrees'),
-            new Delete(uriTemplate:'tree/delete',
+                        name:'UpdateATree'),
+            new Delete(uriTemplate:'tree/{id}/delete',
                         controller: TreeDeleteController::class,
                         name:'GetCollectionOfTrees')
         ])]
