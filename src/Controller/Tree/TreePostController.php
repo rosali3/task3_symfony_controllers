@@ -15,11 +15,11 @@ class TreePostController extends AbstractController
 
     public function __construct(EntityManagerInterface $entityManager){
         $this->entityManager = $entityManager;
-
     }
 
-        public function __invoke(Request $request): Response
+        public function __invoke(Request $request, Tree\Tree $tree): Response//JsonResponse
     {
+        $data = json_decode($request->getContent(), true);
         $tree = new Tree\Tree();
 
         $tree->setTitle($request->request->get('title'));
@@ -28,8 +28,11 @@ class TreePostController extends AbstractController
         $entityManager = $this->entityManager;
         $entityManager->persist($tree);
         $entityManager->flush();
+        return $this->json([
+            'message' => 'User updated successfully',
+            'tree' => $tree,
+        ]);
 
-        return $this->json($tree);
         // Получаем ID пользователя для указания автора поста
         //$data['user_id'] = $_SESSION['user']['id'];
         // Создаем новый экземпляр сущности поста

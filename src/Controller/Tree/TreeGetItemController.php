@@ -3,24 +3,27 @@
 namespace App\Controller\Tree;
 use App\Entity\Tree;
 use Doctrine\ORM\EntityManagerInterface;
-use JetBrains\PhpStorm\NoReturn;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class TreeGetItemController extends AbstractController
 {
-    public function __construct(EntityManagerInterface $entityManager){
-    }
+    private EntityManagerInterface $entityManager;
 
-    public function __invoke(Tree\Tree $tree,
-                             Request   $request): \Symfony\Component\HttpFoundation\JsonResponse
+    public function __construct(EntityManagerInterface $entityManager)
     {
-
-        // dd(json_decode($request->getContent()));
-        return $this->json($tree);
-
-        //$trees = $this->getDoctrine()->getRepository(Tree\Tree::class)->findAll();
-
-        //return $this->json($trees);
+        $this->entityManager = $entityManager;
     }
+
+    public function __invoke(int $id): JsonResponse
+    {
+        $user = $this->entityManager->getRepository(Tree\Tree::class)->find($id);
+
+        if (!$user) {
+            throw $this->createNotFoundException('User not found');
+        }
+
+        return $this->json($user);
+    }
+
 }

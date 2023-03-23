@@ -12,25 +12,32 @@ use Doctrine\ORM\Mapping as ORM;
 
 class TreePatchController extends AbstractController
 {
-    protected EntityManagerInterface $entityManager;
-
-    public function __construct(EntityManagerInterface $entityManager, private readonly ManagerRegistry $doctrine){
-        // $this->doctrine;
-        //$this->entityManager = $entityManager;
-        }
-    public function __invoke(Request $request, Tree\Tree $tree, $entityManager): Response
+    private EntityManagerInterface $entityManager;
+    public function __construct(EntityManagerInterface $entityManager)
     {
+        $this->entityManager = $entityManager;
+        // $this->doctrine;
+        }
+    public function __invoke(Request $request, Tree\Tree $tree, $entityManager): Response // JsonResponse
+    {   //$data = json_decode($request->getContent(), true);
+
         if ($request->request->has('name')) {
             $tree->setTitle($request->request->get('title'));
         }
+        // if (isset($data['name'])) {
+        //            $user->setName($data['name']);
 
         if ($request->request->has('description')) {
             $tree->setDescription($request->request->get('description'));
         }
 
-        $entityManager->persist($tree);
-        $entityManager->flush();
+        $this->$entityManager->persist($tree);
+        $this->$entityManager->flush();
 
-        return $this->json($tree);
+
+        return $this->json([
+            'message' => 'User updated successfully',
+            'tree' => $tree,
+            ]);
     }
 }
