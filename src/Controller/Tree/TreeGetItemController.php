@@ -1,22 +1,23 @@
 <?php
 
-namespace App\Controller\TreeGetCollectionController;
-
+namespace App\Controller\Tree;
 use App\Entity\Tree;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use JetBrains\PhpStorm\NoReturn;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
-class TreeGetCollectionController extends AbstractController
+class TreeGetItemController extends AbstractController
 {
     public function __construct(EntityManagerInterface $entityManager){
     }
 
-    #[NoReturn] public function __invoke(Request $request)
+    public function __invoke(Tree\Tree $tree,
+                             Request   $request): \Symfony\Component\HttpFoundation\JsonResponse
     {
-        dd(json_decode($request->getContent()));
+
+        // dd(json_decode($request->getContent()));
+        return $this->json($tree);
 
         //$trees = $this->getDoctrine()->getRepository(Tree\Tree::class)->findAll();
 
