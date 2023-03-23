@@ -24,10 +24,4 @@ class TreePutController extends AbstractController
         $entityManager->flush();
 
         return $this->json($tree);
-    }
-
-    public function getDoctrine(): ManagerRegistry
-    {
-        return $this->doctrine;
-    }
-}
+    }}
