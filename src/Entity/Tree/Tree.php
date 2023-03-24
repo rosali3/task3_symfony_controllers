@@ -22,27 +22,27 @@ use Doctrine\ORM\Mapping as ORM;
     operations:
         [
             new Post(
-                uriTemplate:'tree.{_format}',
+                uriTemplate:'/tree',
                 controller: TreePostController::class,
                 name:'CreateANewTree'),
             new Get(
-                uriTemplate:'tree/{id}.{_format}', // /users/{id}/reset-password?hash=
+                uriTemplate:'/tree/{id}', // /users/{id}/reset-password?hash=
                 controller: TreeGetItemController::class,
                 name:'GetInfoAboutOneTree'),
             new GetCollection(
-                uriTemplate:'tree.{_format}',
+                uriTemplate:'/tree',
                 controller: TreeGetCollectionController::class,
                 name:'GetCollectionOfTrees'),
             new Put(
-                uriTemplate:'tree/{id}.{_format}',
+                uriTemplate:'/tree/{id}',
                 controller: TreePutController::class,
                 name:'ReplaceATree'),
             new Patch(
-                uriTemplate:'tree/{id}.{_format}',
+                uriTemplate:'/tree/{id}',
                 controller: TreePatchController::class,
                 name:'UpdateATree'),
             new Delete(
-                uriTemplate:'tree/{id}.{_format}',
+                uriTemplate:'/tree/{id}',
                 controller: TreeDeleteController::class,
                 name:'DeleteATree')
         ])]

@@ -4,7 +4,28 @@ controllers:
         namespace: App\Controller
     type: attribute
 
-get_users:
-    path: '/users/{id}'
-    controller: App\Controller\UserController::Get
+get_trees:
+    path: '/tree'
+    controller: App\Controller\Tree\TreeGetCollectionController::Get
     methods: ['GET']
+
+get_tree:
+    path: '/tree/{id}'
+    controller: App\Controller\Tree\TreeGetItemController::Get
+    methods: ['GET']
+
+
+put_tree:
+    path: '/tree/{id}'
+    controller: App\Controller\Tree\TreePutController::Put
+    methods: ['PUT']
+
+patch_tree:
+    path: '/tree/{id}'
+    controller: App\Controller\Tree\TreePatchController::Patch
+    methods: ['PATCH']
+
+delete_tree:
+    path: '/tree/{id}'
+    controller: App\Controller\Tree\TreeDeleteController::Delete
+    methods: ['DELETE']
