@@ -21,10 +21,12 @@ use Doctrine\ORM\Mapping as ORM;
 #[ApiResource(
     operations:
         [
-            new Post(uriTemplate:'tree/{id}/post',
+            new Post(
+                uriTemplate:'tree/post',
                 controller: TreePostController::class,
                 name:'CreateANewTree'),
-            new Get(uriTemplate:'tree/{id}/get',
+            new Get(
+                uriTemplate:'tree/{id}/get',
                 controller: TreeGetItemController::class,
                 name:'GetInfoAboutOneTree'),
             new GetCollection(uriTemplate:'tree/collection',
@@ -42,12 +44,15 @@ use Doctrine\ORM\Mapping as ORM;
         ])]
 
 class Tree
-{   #[ORM\Id]
+{
+    #[ORM\Id]
     #[ORM\GeneratedValue(strategy: "AUTO")]
     #[ORM\Column(type: "integer", nullable: true)]
     private ?int $Id = null;
+
     #[ORM\Column(type: "string",length: 255)]
     private ?string $title = null;
+
     #[ORM\Column(type: "text")]
     private ?string $description = null;
 
@@ -61,17 +66,9 @@ class Tree
     }
 
     /**
-     * @param int|null $Id
-     */
-    public function setId(?int $Id): void
-    {
-        $this->Id = $Id;
-    }
-
-    /**
      * @return string|null
      */
-    public function getTitle(): ?string
+    public function getTitle(): ?string // чтение
     {
         return $this->title;
     }
@@ -79,7 +76,7 @@ class Tree
     /**
      * @param string|null $title
      */
-    public function setTitle(?string $title): void
+    public function setTitle(?string $title): void // изменение
     {
         $this->title = $title;
     }

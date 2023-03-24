@@ -15,15 +15,14 @@ class TreeGetItemController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
-    public function __invoke(int $id): JsonResponse
+    public function __invoke(Tree\Tree $tree, int $id): JsonResponse
     {
-        $user = $this->entityManager->getRepository(Tree\Tree::class)->find($id);
+        $tree = $this->entityManager->getRepository(Tree\Tree::class)->find($id);
 
-        if (!$user) {
+        if (!$tree) {
             throw $this->createNotFoundException('User not found');
         }
 
-        return $this->json($user);
+        return $this->json($tree);
     }
-
 }

@@ -10,12 +10,17 @@ use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\Mapping as ORM;
 class TreeDeleteController extends AbstractController
 {
-    public function __invoke(Tree\Tree $tree, EntityManagerInterface $entityManager): JsonResponse // Response
+    protected EntityManagerInterface $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+    public function __invoke(Tree\Tree $tree, EntityManagerInterface $entityManager): JsonResponse
     {
         $entityManager->remove($tree);
         $entityManager->flush();
 
-        // return $this->json(null, 204);
         return new JsonResponse(['message' => 'User deleted']);
     }
 }
