@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class TreeGetItemController extends AbstractController
 {
-    private EntityManagerInterface $entityManager;
+    protected EntityManagerInterface $entityManager;
 
     public function __construct(EntityManagerInterface $entityManager)
     {
@@ -17,11 +17,13 @@ class TreeGetItemController extends AbstractController
 
     public function __invoke(Tree\Tree $tree, int $id): JsonResponse
     {
+        /***
         $tree = $this->entityManager->getRepository(Tree\Tree::class)->find($id);
 
         if (!$tree) {
             throw $this->createNotFoundException('User not found');
         }
+        *****/
 
         return $this->json($tree);
     }

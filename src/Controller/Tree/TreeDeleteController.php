@@ -21,6 +21,6 @@ class TreeDeleteController extends AbstractController
         $entityManager->remove($tree);
         $entityManager->flush();
 
-        return new JsonResponse(['message' => 'User deleted']);
+        return new JsonResponse(null, Response::HTTP_NO_CONTENT);
     }
 }

@@ -22,25 +22,29 @@ use Doctrine\ORM\Mapping as ORM;
     operations:
         [
             new Post(
-                uriTemplate:'tree/post',
+                uriTemplate:'tree.{_format}',
                 controller: TreePostController::class,
                 name:'CreateANewTree'),
             new Get(
-                uriTemplate:'tree/{id}/get',
+                uriTemplate:'tree/{id}.{_format}', // /users/{id}/reset-password?hash=
                 controller: TreeGetItemController::class,
                 name:'GetInfoAboutOneTree'),
-            new GetCollection(uriTemplate:'tree/collection',
-                                controller: TreeGetCollectionController::class,
-                                name:'GetCollectionOfTrees'),
-            new Put(uriTemplate:'tree/{id}/put',
-                    controller: TreePutController::class,
-                    name:'ReplaceATree'),
-            new Patch(uriTemplate:'tree/{id}/update',
-                        controller: TreePatchController::class,
-                        name:'UpdateATree'),
-            new Delete(uriTemplate:'tree/{id}/delete',
-                        controller: TreeDeleteController::class,
-                        name:'GetCollectionOfTrees')
+            new GetCollection(
+                uriTemplate:'tree.{_format}',
+                controller: TreeGetCollectionController::class,
+                name:'GetCollectionOfTrees'),
+            new Put(
+                uriTemplate:'tree/{id}.{_format}',
+                controller: TreePutController::class,
+                name:'ReplaceATree'),
+            new Patch(
+                uriTemplate:'tree/{id}.{_format}',
+                controller: TreePatchController::class,
+                name:'UpdateATree'),
+            new Delete(
+                uriTemplate:'tree/{id}.{_format}',
+                controller: TreeDeleteController::class,
+                name:'DeleteATree')
         ])]
 
 class Tree
